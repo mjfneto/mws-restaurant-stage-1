@@ -22,11 +22,12 @@ body {
 	margin: 0;
   position:relative;
   height: 100vh;
+  width: 100vw;
 }
 ul, li {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.62rem;
-	color: #333;
+	color: #f58500;
 }
 
 a {
@@ -34,7 +35,7 @@ a {
 	text-decoration: none;
 }
 a:hover, a:focus {
-	color: #3397db;
+	color: #135286;
 	text-decoration: none;
 }
 a img{
@@ -48,8 +49,8 @@ article, aside, canvas, details, figcaption, figure, footer, header, hgroup, men
 	display: block;
 }
 #maincontent {
-  background-color: #3397DB;
-  width: 100vw;
+  background-color: #135286;
+  width: 100%;
   height: auto;
 }
 #footer {
@@ -75,7 +76,7 @@ header {
     height: 20rem;
   }
   ul, li {
-    font-size: 16px;
+    font-size: 25px;
   }
   #footer {
     font-size: 18px;
@@ -104,7 +105,7 @@ nav h1 a {
 .inside #breadcrumb {
   padding: 10px 40px 16px;
   list-style: none;
-  background-color: #3397DB;
+  background-color: #135286;
   font-size: 2rem;
   margin: 0;
   width: 100%;
@@ -119,7 +120,7 @@ nav h1 a {
 /* Add a slash symbol (/) before/behind each list item */
 #breadcrumb li+li:before {
     padding: 8px;
-    color: black;
+    color: #f58500;
     content: "/\00a0";
 }
 
@@ -153,6 +154,10 @@ nav h1 a {
   background-color: #ccc;
 }
 
+#map .leaflet-control-attribution a {
+  color: #0D5973;
+}
+
 /* ====================== Map Medias ====================== */
 @media screen and (max-width: 768px) {
   #map {
@@ -164,7 +169,7 @@ nav h1 a {
 .filter-options {
   width: 100%;
   height: auto;
-  background-color: #3397DB;
+  background-color: #135286;
   align-items: center;
   border-bottom: 2px solid #333;
 }
@@ -286,7 +291,7 @@ nav h1 a {
   position: absolute;
   bottom: 5%;
   transform: translateY(-25%);
-  background-color: #3397DB;
+  background-color: #135286;
   border: 3px solid #fff;
   color: orange;
   display: inline-block;
@@ -373,7 +378,7 @@ nav h1 a {
   background: #be6601;
 }
 #restaurant-name {
-  color: #f18200;
+  color: #f58500;
   font-family: Arial,sans-serif;
   font-size: 20pt;
   font-weight: 700;
@@ -386,6 +391,7 @@ nav h1 a {
 	max-width: 100%;
 }
 #restaurant-address {
+  color: #f58500;
   font-size: 25px;
   margin: 10px 0px;
 }
