@@ -120,6 +120,16 @@ updateRestaurants = () => {
     } else {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
+      if (restaurants.length === 0) {
+        const ul = document.getElementById('restaurants-list');
+
+        ul.innerHTML = `
+        <div class="error-container">
+          <p class="error-query-icon">🍽️</p>
+          <p class="error-query">We couldn't find ${cuisine} restaurants in ${neighborhood}.</p>
+        <div>
+        `
+      }
     }
   })
 }
@@ -197,4 +207,3 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 } */
-
