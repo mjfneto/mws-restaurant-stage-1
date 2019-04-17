@@ -209,7 +209,7 @@ resetRestaurants = (restaurants) => {
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
   restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
+    ul.insertAdjacentHTML('beforeend', createRestaurantHTML(restaurant));
   });
   addMarkersToMap();
 }
@@ -218,20 +218,15 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant) => {
-  const li = document.createElement('li');
-  li.className = 'info-container';
-  li.setAttribute('style', `background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)});`);
-
-  li.innerHTML = `
-    <div class='info-wrapper'>
+  return `
+    <li class="info-container" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})">
+    <div class="info-wrapper">
       <h1><span>${restaurant.name}</span></h1>
       <p><span>${restaurant.neighborhood}</span></p>
       <p><span>${restaurant.address}</span></p>
-      <button class='more-button' onclick="location.href='${DBHelper.urlForRestaurant(restaurant)}'" type="button">View Details</button>
+      <button class="more-button" onclick="location.href='${DBHelper.urlForRestaurant(restaurant)}'" type="button">View Details</button>
     </div>
   `;
-
-  return li
 }
 
 /**
