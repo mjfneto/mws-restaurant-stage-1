@@ -62,7 +62,7 @@ section {
 #maincontent {
   background-color: #135286;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 #footer {
   background-color: #444;
@@ -83,6 +83,9 @@ header {
 
 /* ====================== Document Medias ====================== */
 @media screen and (max-width: 768px) {
+  #maincontent {
+    height: auto;
+  }
   nav {
     height: 20rem;
   }
