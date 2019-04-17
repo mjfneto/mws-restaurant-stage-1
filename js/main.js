@@ -8,7 +8,7 @@ var markers = []
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
 document.addEventListener('DOMContentLoaded', (event) => {
-  initMap(); // added 
+  initMap(); // added
   fetchNeighborhoods();
   fetchCuisines();
 });
@@ -32,10 +32,21 @@ fetchNeighborhoods = () => {
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
-  neighborhoods.forEach(neighborhood => {
+
+  const ariaAttrs = [
+    { attr: 'role', value: 'option' },
+    { attr: 'aria-selected', value: 'false' }
+  ]
+
+  neighborhoods.forEach((neighborhood) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+
+    for (let aria of ariaAttrs) {
+      option.setAttribute(aria.attr, aria.value);
+    }
+
     select.append(option);
   });
 }
@@ -60,10 +71,20 @@ fetchCuisines = () => {
 fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
 
+  const ariaAttrs = [
+    {attr: 'role', value: 'option'},
+    {attr: 'aria-selected', value: 'false'}
+  ]
+
   cuisines.forEach(cuisine => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
+
+    for (let aria of ariaAttrs) {
+      option.setAttribute(aria.attr, aria.value);
+    }
+
     select.append(option);
   });
 }
@@ -113,6 +134,17 @@ updateRestaurants = () => {
 
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
+
+  const previousSelections = document.querySelectorAll('option[aria-selected=true]');
+
+  if (previousSelections.length > 0) {
+    for (let selection of previousSelections) {
+      selection.setAttribute('aria-selected', 'false');
+    }
+  };
+
+  cSelect[cIndex].setAttribute('aria-selected', 'true');
+  nSelect[nIndex].setAttribute('aria-selected', 'true');
 
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
@@ -196,7 +228,7 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 
-} 
+}
 /* addMarkersToMap = (restaurants = self.restaurants) => {
   restaurants.forEach(restaurant => {
     // Add marker to the map
