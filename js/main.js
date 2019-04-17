@@ -125,7 +125,7 @@ initMap = () => {
 /**
  * Update page and map for current restaurants.
  */
-updateRestaurants = () => {
+updateRestaurants = (component) => {
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
 
@@ -135,16 +135,7 @@ updateRestaurants = () => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  const previousSelections = document.querySelectorAll('option[aria-selected=true]');
-
-  if (previousSelections.length > 0) {
-    for (let selection of previousSelections) {
-      selection.setAttribute('aria-selected', 'false');
-    }
-  };
-
-  cSelect[cIndex].setAttribute('aria-selected', 'true');
-  nSelect[nIndex].setAttribute('aria-selected', 'true');
+  setAriaSelected(component, cSelect, nSelect, cIndex, nIndex);
 
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
@@ -164,6 +155,35 @@ updateRestaurants = () => {
       }
     }
   })
+}
+
+function setAriaSelected(component, cSelect, nSelect, cIndex, nIndex) {
+  switch (component) {
+    case undefined:
+      cSelect[0].setAttribute('aria-selected', 'true');
+      nSelect[0].setAttribute('aria-selected', 'true');
+      break;
+    case cSelect:
+      for (option of cSelect.children) {
+        if (option.getAttribute('aria-selected') === 'true'){
+          option.setAttribute('aria-selected', 'false');
+        } else {
+          continue;
+        };
+      }
+      cSelect[cIndex].setAttribute('aria-selected', 'true');
+      break;
+    case nSelect:
+      for (option of nSelect.children) {
+        if (option.getAttribute('aria-selected') === 'true'){
+          option.setAttribute('aria-selected', 'false');
+        } else {
+          continue;
+        };
+      }
+      nSelect[nIndex].setAttribute('aria-selected', 'true');
+      break;
+  }
 }
 
 /**

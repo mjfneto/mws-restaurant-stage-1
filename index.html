@@ -23,11 +23,11 @@
       <section class="filter-options">
         <h2>Filter Results</h2>
         <label for="neighborhoods-select" id="neighborhoods-label">Neighborhood</label>
-        <select id="neighborhoods-select" name="neighborhoods" role="listbox" aria-labelledby="neighborhoods-label" aria-multiselectable="true" onchange="updateRestaurants()">
+        <select id="neighborhoods-select" name="neighborhoods" role="listbox" aria-labelledby="neighborhoods-label" aria-multiselectable="true" onselect="setAriaToOptions(this)" onchange="updateRestaurants(this)">
           <option value="all" role="option">All Neighborhoods</option>
         </select>
         <label for="cuisines-select" id="cuisines-label">Cuisine Type</label>
-        <select id="cuisines-select" name="cuisines" role="listbox" aria-labelledby="cuisines-label" aria-multiselectable="true" onchange="updateRestaurants()">
+        <select id="cuisines-select" name="cuisines" role="listbox" aria-labelledby="cuisines-label" aria-multiselectable="true" onchange="updateRestaurants(this)">
           <option value="all" role="option">All Cuisines</option>
         </select>
       </section>
