@@ -62,7 +62,7 @@ section {
 #maincontent {
   background-color: #135286;
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 #footer {
   background-color: #444;
@@ -83,9 +83,6 @@ header {
 
 /* ====================== Document Medias ====================== */
 @media screen and (max-width: 768px) {
-  #maincontent {
-    height: auto;
-  }
   nav {
     height: 20rem;
   }
@@ -94,6 +91,12 @@ header {
   }
   #footer {
     font-size: 18px;
+  }
+}
+
+@media screen and (min-height: 1110px) {
+  #maincontent {
+    height: 100%;
   }
 }
 
@@ -232,6 +235,7 @@ nav h1 a {
 /* ====================== Restaurant Listing ====================== */
 .list-container {
   height: auto;
+  overflow: scroll;
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -276,7 +280,6 @@ nav h1 a {
   height: 400px;
   text-align: left;
   width: 270px;
-  overflow: hidden;
 }
 #restaurants-list .info-wrapper {
   position: absolute;
