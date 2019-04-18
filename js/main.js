@@ -135,7 +135,7 @@ updateRestaurants = (component) => {
   const cuisine = cSelect[cIndex].value;
   const neighborhood = nSelect[nIndex].value;
 
-  setAriaSelected(component, cSelect, nSelect, cIndex, nIndex);
+  setAriaSelectedToFilter(component, cSelect, nSelect, cIndex, nIndex);
 
   DBHelper.fetchRestaurantByCuisineAndNeighborhood(cuisine, neighborhood, (error, restaurants) => {
     if (error) { // Got an error!
@@ -157,7 +157,10 @@ updateRestaurants = (component) => {
   })
 }
 
-function setAriaSelected(component, cSelect, nSelect, cIndex, nIndex) {
+/**
+ * All selected options have aria-selected set to 'true'. All options that are not selected have aria-selected set to 'false'.
+ */
+function setAriaSelectedToFilter(component, cSelect, nSelect, cIndex, nIndex) {
   switch (component) {
     case undefined:
       cSelect[0].setAttribute('aria-selected', 'true');
@@ -208,8 +211,8 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
-  restaurants.forEach(restaurant => {
-    ul.insertAdjacentHTML('beforeend', createRestaurantHTML(restaurant));
+  restaurants.forEach((restaurant, index) => {
+    ul.insertAdjacentHTML('beforeend', createRestaurantHTML(restaurant, index));
   });
   addMarkersToMap();
 }
@@ -217,15 +220,18 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant) => {
+createRestaurantHTML = (restaurant, index) => {
   return `
-    <li class="info-container" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})">
-    <div class="info-wrapper">
-      <h1><span>${restaurant.name}</span></h1>
-      <p><span>${restaurant.neighborhood}</span></p>
-      <p><span>${restaurant.address}</span></p>
-      <button class="more-button" onclick="location.href='${DBHelper.urlForRestaurant(restaurant)}'" type="button">View Details</button>
-    </div>
+    <li class="info-container" tabindex="0" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})" role="option" aria-labelledby="info-container-label${restaurant.id}">
+      <div class="info-wrapper">
+        <div id="info-container-label${index + 1}">
+          <h1><span>${restaurant.name}</span></h1>
+          <p><span>${restaurant.neighborhood}</span></p>
+          <p><span>${restaurant.address}</span></p>
+        </div>
+        <button id="more-button" onclick="location.href='${DBHelper.urlForRestaurant(restaurant)}'" type="button" role="button">View Details</button>
+      </div>
+    </li>
   `;
 }
 
