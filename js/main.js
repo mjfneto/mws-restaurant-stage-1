@@ -28,7 +28,10 @@ fetchNeighborhoods = () => {
 }
 
 /**
- * Set neighborhoods HTML.
+ * Set neighborhoods HTML. Sets aria-* attributes too.
+ * New attributes can be added to ariaAtrrs, and switch
+ * can be used in cases where only the name of an attribute
+ * is needed, if its value is given in other function or file.
  */
 fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
@@ -38,13 +41,16 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     { attr: 'aria-selected', value: 'false' }
   ]
 
-  neighborhoods.forEach((neighborhood) => {
+  neighborhoods.forEach((neighborhood, index) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
 
     for (let aria of ariaAttrs) {
-      option.setAttribute(aria.attr, aria.value);
+      switch (aria.attr) {
+        default:
+          option.setAttribute(aria.attr, aria.value);
+      }
     }
 
     select.append(option);
@@ -76,13 +82,16 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
     {attr: 'aria-selected', value: 'false'}
   ]
 
-  cuisines.forEach(cuisine => {
+  cuisines.forEach((cuisine, index) => {
     const option = document.createElement('option');
     option.innerHTML = cuisine;
     option.value = cuisine;
 
     for (let aria of ariaAttrs) {
-      option.setAttribute(aria.attr, aria.value);
+      switch (aria.attr) {
+        default:
+          option.setAttribute(aria.attr, aria.value);
+      }
     }
 
     select.append(option);

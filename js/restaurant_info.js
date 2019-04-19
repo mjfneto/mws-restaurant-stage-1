@@ -70,9 +70,25 @@ fetchRestaurantFromURL = (callback) => {
         console.error(error);
         return;
       }
+      setAriaToMap(restaurant);
       fillRestaurantHTML();
       callback(null, restaurant)
     });
+  }
+}
+
+/**
+ * Sets aria-* attrs to map container.
+ */
+function setAriaToMap(restaurant) {
+  const mapBox = document.querySelector('#map');
+
+  const ariaAttrs = [
+    { attr: 'aria-label', value: `${restaurant.name}`}
+  ]
+
+  for (let aria of ariaAttrs) {
+  mapBox.setAttribute(aria.attr, aria.value);
   }
 }
 
@@ -89,6 +105,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = restaurant.name;
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -103,21 +120,42 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
 
 /**
  * Create restaurant operating hours HTML table and add it to the webpage.
+ * It also adds required aria attributes to table elements.
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
-  const hours = document.getElementById('restaurant-hours');
-  for (let key in operatingHours) {
-    const row = document.createElement('tr');
+  const restaurantHours = document.getElementById('restaurant-hours');
 
-    const day = document.createElement('td');
-    day.innerHTML = key;
-    row.appendChild(day);
+  const week = Object.entries(operatingHours);
 
-    const time = document.createElement('td');
-    time.innerHTML = operatingHours[key];
-    row.appendChild(time);
+  restaurantHours.setAttribute('aria-rowcount', `${week.length}`);
 
-    hours.appendChild(row);
+  for (const [day, schedules] of week) {
+
+    let timetable = schedules.split(',');
+
+    timetable = timetable.map(shift => {
+      return shift.replace('-', 'to');
+    })
+
+    const tr = document.createElement('tr');
+    tr.setAttribute('role', 'row');
+    tr.setAttribute('tabindex', '0');
+
+    const tdDay = document.createElement('td');
+    tdDay.setAttribute('role', 'cell');
+    tdDay.setAttribute('aria-rowindex', '1');
+    tdDay.innerHTML = day;
+    tr.insertAdjacentElement('beforeend', tdDay);
+
+    timetable.forEach((shift, index) => {
+      const tdShift = document.createElement('td');
+      tdShift.setAttribute('role', 'cell');
+      tdShift.setAttribute('aria-rowindex', `${index + 2}`);
+      tdShift.innerHTML = `${shift ? shift : ''}`;
+      tr.insertAdjacentElement('beforeend', tdShift);
+    })
+
+    restaurantHours.insertAdjacentElement('beforeend', tr);
   }
 }
 
@@ -162,7 +200,12 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
-  li.innerHTML = restaurant.name;
+  const anchor = document.createElement('a');
+  li.append(anchor);
+  anchor.innerHTML = restaurant.name;
+  anchor.setAttribute('href', location.href);
+  anchor.setAttribute('aria-current', 'page');
+
   breadcrumb.appendChild(li);
 }
 
