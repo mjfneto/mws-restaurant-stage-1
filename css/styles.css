@@ -34,11 +34,15 @@ a {
 	color: orange;
 	text-decoration: none;
 }
-a:hover, a:focus {
+a:hover {
+	color: #135286;
+	text-decoration: none;
+}
+a:focus {
   background: #e91e63;
   color: #fff;
   text-decoration: underline;
-	outline: 0;
+  outline: 0;
   box-shadow: 0 0 8px 3px rgba(255, 255, 255, 0.8);
 }
 a img{
@@ -176,6 +180,10 @@ nav h1 a {
     text-decoration: none;
 }
 
+#breadcrumb li a:first-child:hover {
+    color: #f58500;
+}
+
 /* Add a color on mouse-over */
 #breadcrumb li a:hover,
 #breadcrumb li:last-child a:hover {
@@ -192,6 +200,9 @@ nav h1 a {
 }
 #breadcrumb li:last-child a {
   color: #f58500;
+}
+#breadcrumb li:last-child a:hover {
+  color: #fff;
 }
 
 /* ====================== Navigation Medias ====================== */
@@ -442,6 +453,11 @@ nav h1 a {
   letter-spacing: 0.9rem;
   text-transform: uppercase;
   transition: font-size 700ms linear;
+}
+.inside header h1 a:hover {
+  cursor: pointer;
+  color: #135286;
+	text-decoration: none;
 }
 .inside .map-container {
   background: blue none repeat scroll 0 0;
