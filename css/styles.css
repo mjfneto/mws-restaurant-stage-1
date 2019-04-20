@@ -200,7 +200,6 @@ nav h1 a {
   height: auto;
   background-color: #135286;
   align-items: center;
-  border-bottom: 2px solid #333;
 }
 .filter-options h2 {
   color: white;
@@ -229,6 +228,17 @@ nav h1 a {
   width: auto;
   transition: width 250ms linear;
 }
+.filter-options #results-container {
+  background-color: #0d3758;
+}
+.filter-options > #results-container > #results {
+  margin: 0 0 0 20px;
+  font-size: 20px;
+  color: orange;
+}
+.filter-options > #results-container.-inactive {
+  display: none;
+}
 
 /* ====================== Filtering Medias ====================== */
 
@@ -251,6 +261,7 @@ nav h1 a {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  background-color: #444;
 }
 
 #list-container::-webkit-scrollbar {
@@ -268,19 +279,6 @@ nav h1 a {
 
 #list-container::-webkit-scrollbar-thumb:hover {
   background: #be6601;
-}
-
-#list-container #results {
-  margin-left: 20px;
-  font-size: 20px;
-  color: orange;
-}
-#results-container {
-  background-color: #444;
-  float: left;
-}
-#results-container.-inactive {
-  display: none;
 }
 #restaurants-list {
   background-color: #444;
@@ -353,7 +351,7 @@ nav h1 a {
 #restaurants-list #more-button:hover {
   cursor: pointer;
   background-color: orange;
-  color: #444;
+  color: #135286;
 }
 #restaurants-list #noresults-container {
   padding: 30px 0;

@@ -256,7 +256,7 @@ function fillNoResultsHTML(cuisine, neighborhood) {
   resultsContainer.classList.add('-inactive');
 
   ul.innerHTML = `
-    <li id="noresults-container">
+    <li id="noresults-container" role="status">
       <label for="noresults-container">We couldn't find ${cuisine} restaurants in ${neighborhood}.</label>
       <p id="noresults-queryicon" aria-hidden="true">🍽️</p>
     <li>

@@ -139,7 +139,6 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 
     const tr = document.createElement('tr');
     tr.setAttribute('role', 'row');
-    tr.setAttribute('tabindex', '0');
 
     const tdDay = document.createElement('td');
     tdDay.setAttribute('role', 'cell');
