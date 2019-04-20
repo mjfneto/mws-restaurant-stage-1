@@ -186,9 +186,15 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
 createReviewHTML = (review) => {
   return `
     <li>
-      <div class="name-date"><span>${review.name}</span><span>${review.date}</span></div>
-      <p class="rating">Rating: ${review.rating}</p>
-      <p class="comments">${review.comments}</p>
+      <article>
+        <div class="name-date">
+          <h3 class="name-date">${review.name}</h3><p>${review.date}</p>
+        </div>
+        <div class="rating-comments">
+          <p class="rating">Rating: ${review.rating}</p>
+          <p class="comments">${review.comments}</p>
+        </div>
+      </article>
     </li>
   `
 }
@@ -203,6 +209,7 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   li.append(anchor);
   anchor.innerHTML = restaurant.name;
   anchor.setAttribute('href', location.href);
+  anchor.setAttribute('role', 'link');
   anchor.setAttribute('aria-current', 'page');
 
   breadcrumb.appendChild(li);
