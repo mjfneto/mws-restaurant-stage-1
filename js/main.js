@@ -266,11 +266,11 @@ function fillNoResultsHTML(cuisine, neighborhood) {
 /**
  * Create restaurant HTML.
  */
-createRestaurantHTML = (restaurant, index) => {
+createRestaurantHTML = (restaurant) => {
   return `
     <li class="info-container" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})" role="option" aria-labelledby="info-container-label${restaurant.id}">
       <div class="info-wrapper">
-        <div id="info-container-label${index + 1}">
+        <div id="info-container-label${restaurant.id}">
           <h1><span>${restaurant.name}</span></h1>
           <p><span>${restaurant.neighborhood}</span></p>
           <p><span>${restaurant.address}</span></p>
