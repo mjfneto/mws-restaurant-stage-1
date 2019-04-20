@@ -138,17 +138,15 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
     })
 
     const tr = document.createElement('tr');
-    tr.setAttribute('role', 'row');
+
 
     const tdDay = document.createElement('td');
-    tdDay.setAttribute('role', 'cell');
     tdDay.setAttribute('aria-rowindex', '1');
     tdDay.innerHTML = day;
     tr.insertAdjacentElement('beforeend', tdDay);
 
     timetable.forEach((shift, index) => {
       const tdShift = document.createElement('td');
-      tdShift.setAttribute('role', 'cell');
       tdShift.setAttribute('aria-rowindex', `${index + 2}`);
       tdShift.innerHTML = `${shift ? shift : ''}`;
       tr.insertAdjacentElement('beforeend', tdShift);
@@ -211,7 +209,6 @@ fillBreadcrumb = (restaurant=self.restaurant) => {
   li.append(anchor);
   anchor.innerHTML = restaurant.name;
   anchor.setAttribute('href', location.href);
-  anchor.setAttribute('role', 'link');
   anchor.setAttribute('aria-current', 'page');
 
   breadcrumb.appendChild(li);

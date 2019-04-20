@@ -37,7 +37,6 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
   const select = document.getElementById('neighborhoods-select');
 
   const ariaAttrs = [
-    { attr: 'role', value: 'option' },
     { attr: 'aria-selected', value: 'false' }
   ]
 
@@ -78,7 +77,6 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
   const select = document.getElementById('cuisines-select');
 
   const ariaAttrs = [
-    {attr: 'role', value: 'option'},
     {attr: 'aria-selected', value: 'false'}
   ]
 
@@ -275,7 +273,7 @@ createRestaurantHTML = (restaurant) => {
           <p><span>${restaurant.neighborhood}</span></p>
           <p><span>${restaurant.address}</span></p>
         </div>
-        <button id="more-button" onclick="location.href='${DBHelper.urlForRestaurant(restaurant)}'" type="button" role="button">View Details</button>
+        <a id="more-button" href="${DBHelper.urlForRestaurant(restaurant)}" type="button" role="button">View Details</a>
       </div>
     </li>
   `;
