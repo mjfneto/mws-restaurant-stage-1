@@ -84,7 +84,7 @@ function setAriaToMap(restaurant) {
   const mapBox = document.querySelector('#map');
 
   const ariaAttrs = [
-    { attr: 'aria-label', value: `${restaurant.name}`}
+    { attr: 'aria-label', value: `${restaurant.name} pinned location`}
   ]
 
   for (let aria of ariaAttrs) {
@@ -163,6 +163,8 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
+  container.classList.add('col-12');
+
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
   container.insertAdjacentElement('beforeend', title);
