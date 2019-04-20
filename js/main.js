@@ -153,14 +153,9 @@ updateRestaurants = (component) => {
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
       if (restaurants.length === 0) {
-        const ul = document.getElementById('restaurants-list');
-
-        ul.innerHTML = `
-        <div class="error-container">
-          <p class="error-query-icon">🍽️</p>
-          <p class="error-query">We couldn't find ${cuisine} restaurants in ${neighborhood}.</p>
-        <div>
-        `
+        fillNoResultsHTML(cuisine, neighborhood);
+      } else {
+        fillResultsHTML(restaurants.length, cuisine, neighborhood);
       }
     }
   })
@@ -220,6 +215,7 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   const ul = document.getElementById('restaurants-list');
+
   restaurants.forEach((restaurant, index) => {
     ul.insertAdjacentHTML('beforeend', createRestaurantHTML(restaurant, index));
   });
@@ -227,11 +223,52 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
 }
 
 /**
+ * Creates an HTML to display search results and adds it to the page.
+ */
+function fillResultsHTML(length, cuisine, neighborhood) {
+  const resultsContainer = document.getElementById('results-container');
+  resultsContainer.classList.remove('-inactive');
+
+  if (cuisine !== 'all' || neighborhood !== 'all') {
+
+    if (cuisine !== 'all' && neighborhood === 'all') {
+      resultsContainer.innerHTML = `<p id="results">${length} ${cuisine} restaurants found</p>`;
+      return;
+    }
+
+    if (cuisine === 'all' && neighborhood !== 'all') {
+      resultsContainer.innerHTML = `<p id="results">${length} restaurants found in ${neighborhood}</p>`;
+      return;
+    }
+
+    resultsContainer.innerHTML = `<p id="results">${length} ${cuisine} restaurants found in ${neighborhood}</p>`;
+    return;
+  }
+  resultsContainer.innerHTML = `<p id="results">${length} restaurants found</p>`;
+}
+
+/**
+ * Creates an HTML to display an error message and adds it to the page.
+ */
+function fillNoResultsHTML(cuisine, neighborhood) {
+  const ul = document.getElementById('restaurants-list');
+  const resultsContainer = document.getElementById('results-container');
+  resultsContainer.classList.add('-inactive');
+
+  ul.innerHTML = `
+    <li id="noresults-container">
+      <label for="noresults-container">We couldn't find ${cuisine} restaurants in ${neighborhood}.</label>
+      <p id="noresults-queryicon" aria-hidden="true">🍽️</p>
+    <li>
+    `
+}
+
+/**
  * Create restaurant HTML.
  */
 createRestaurantHTML = (restaurant, index) => {
   return `
-    <li class="info-container" tabindex="0" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})" role="option" aria-labelledby="info-container-label${restaurant.id}">
+    <li class="info-container" style="background-image: url(${DBHelper.imageUrlForRestaurant(restaurant)})" role="option" aria-labelledby="info-container-label${restaurant.id}">
       <div class="info-wrapper">
         <div id="info-container-label${index + 1}">
           <h1><span>${restaurant.name}</span></h1>

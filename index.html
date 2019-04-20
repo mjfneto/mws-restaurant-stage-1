@@ -10,7 +10,7 @@
   <title>Restaurant Reviews</title>
 </head>
 
-<body tabindex="-1">
+<body>
   <header>
     <nav>
       <h1><a href="/" role="link">Restaurant Reviews</a></h1>
@@ -31,7 +31,8 @@
         <option value="all" role="option">All Cuisines</option>
       </select>
     </section>
-    <section class="list-container">
+    <section id="list-container" aria-live="polite" aria-relevant="text">
+      <div id="results-container" role="status"></div>
       <ul id="restaurants-list" role="listbox"></ul>
     </section>
   </main>

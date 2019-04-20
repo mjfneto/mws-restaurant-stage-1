@@ -245,7 +245,7 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Listing ====================== */
-.list-container {
+#list-container {
   height: auto;
   overflow: scroll;
   overflow-x: scroll;
@@ -253,23 +253,35 @@ nav h1 a {
   white-space: nowrap;
 }
 
-.list-container::-webkit-scrollbar {
+#list-container::-webkit-scrollbar {
   width: 20px;
 }
 
-.list-container::-webkit-scrollbar-track {
+#list-container::-webkit-scrollbar-track {
   background: #333;
 }
 
-.list-container::-webkit-scrollbar-thumb {
+#list-container::-webkit-scrollbar-thumb {
   background: orange;
   border-radius: 10px;
 }
 
-.list-container::-webkit-scrollbar-thumb:hover {
+#list-container::-webkit-scrollbar-thumb:hover {
   background: #be6601;
 }
 
+#list-container #results {
+  margin-left: 20px;
+  font-size: 20px;
+  color: orange;
+}
+#results-container {
+  background-color: #444;
+  float: left;
+}
+#results-container.-inactive {
+  display: none;
+}
 #restaurants-list {
   background-color: #444;
   list-style: outside none none;
@@ -343,20 +355,20 @@ nav h1 a {
   background-color: orange;
   color: #444;
 }
-#restaurants-list .error-container {
+#restaurants-list #noresults-container {
   padding: 30px 0;
 }
-#restaurants-list .error-query-icon {
-  font-size: 10rem;
-}
-#restaurants-list .error-query {
+#restaurants-list #noresults-container label {
   font-size: 20px;
   color: orange;
+}
+#restaurants-list #noresults-queryicon {
+  font-size: 10rem;
 }
 
 /* ====================== Restaurant Listing Medias ====================== */
 @media screen and (max-width: 768px) {
-  .list-container {
+  #list-container {
     height: auto;
     overflow-x: hidden;
     overflow-y: hidden;
