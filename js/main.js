@@ -197,7 +197,7 @@ function setAriaSelectedToFilter(component, cSelect, nSelect, cIndex, nIndex) {
 resetRestaurants = (restaurants) => {
   // Remove all restaurants
   self.restaurants = [];
-  const ul = document.getElementById('restaurants-list');
+  const ul = document.querySelector('.restaurants-list');
   ul.innerHTML = '';
 
   // Remove all map markers
@@ -212,7 +212,7 @@ resetRestaurants = (restaurants) => {
  * Create all restaurants HTML and add them to the webpage.
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
-  const ul = document.getElementById('restaurants-list');
+  const ul = document.querySelector('.restaurants-list');
 
   restaurants.forEach((restaurant, index) => {
     ul.insertAdjacentHTML('beforeend', createRestaurantHTML(restaurant, index));
@@ -224,39 +224,51 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  * Creates an HTML to display search results and adds it to the page.
  */
 function fillResultsHTML(length, cuisine, neighborhood) {
-  const resultsContainer = document.getElementById('results-container');
+  const resultsContainer = document.querySelector('.results-container');
   resultsContainer.classList.remove('-inactive');
 
   if (cuisine !== 'all' || neighborhood !== 'all') {
 
     if (cuisine !== 'all' && neighborhood === 'all') {
-      resultsContainer.innerHTML = `<p id="results">${length} ${cuisine} restaurants found</p>`;
+      if (length === 1) {
+        resultsContainer.innerHTML = `<p class="results">${length} ${cuisine} restaurant found</p>`;
+      } else {
+        resultsContainer.innerHTML = `<p class="results">${length} ${cuisine} restaurants found</p>`;
+      }
       return;
     }
 
     if (cuisine === 'all' && neighborhood !== 'all') {
-      resultsContainer.innerHTML = `<p id="results">${length} restaurants found in ${neighborhood}</p>`;
+      if (length === 1) {
+        resultsContainer.innerHTML = `<p class="results">${length} restaurant found in ${neighborhood}</p>`;
+      } else {
+        resultsContainer.innerHTML = `<p class="results">${length} restaurants found in ${neighborhood}</p>`;
+      }
       return;
     }
 
-    resultsContainer.innerHTML = `<p id="results">${length} ${cuisine} restaurants found in ${neighborhood}</p>`;
+    if (length === 1) {
+      resultsContainer.innerHTML = `<p class="results">${length} ${cuisine} restaurant found in ${neighborhood}</p>`;
+    } else {
+      resultsContainer.innerHTML = `<p class="results">${length} ${cuisine} restaurants found in ${neighborhood}</p>`;
+    }
     return;
   }
-  resultsContainer.innerHTML = `<p id="results">${length} restaurants found</p>`;
+  resultsContainer.innerHTML = `<p class="results">${length} restaurants found</p>`;
 }
 
 /**
  * Creates an HTML to display an error message and adds it to the page.
  */
 function fillNoResultsHTML(cuisine, neighborhood) {
-  const ul = document.getElementById('restaurants-list');
-  const resultsContainer = document.getElementById('results-container');
+  const ul = document.querySelector('.restaurants-list');
+  const resultsContainer = document.querySelector('.results-container');
   resultsContainer.classList.add('-inactive');
 
   ul.innerHTML = `
-    <li id="noresults-container" role="status">
+    <li id="noresults-container" class="noresults-container" role="status">
       <label for="noresults-container">We couldn't find ${cuisine} restaurants in ${neighborhood}.</label>
-      <p id="noresults-queryicon" aria-hidden="true">🍽️</p>
+      <p class="noresults-queryicon" aria-hidden="true">🍽️</p>
     <li>
     `
 }

@@ -96,18 +96,18 @@ function setAriaToMap(restaurant) {
  * Create restaurant HTML and add it to the webpage
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
-  const name = document.getElementById('restaurant-name');
+  const name = document.querySelector('.restaurant-name');
   name.innerHTML = restaurant.name;
 
-  const address = document.getElementById('restaurant-address');
+  const address = document.querySelector('.restaurant-address');
   address.innerHTML = restaurant.address;
 
-  const image = document.getElementById('restaurant-img');
+  const image = document.querySelector('.restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
   image.alt = restaurant.name;
 
-  const cuisine = document.getElementById('restaurant-cuisine');
+  const cuisine = document.querySelector('.restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -123,7 +123,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
  * It also adds required aria attributes to table elements.
  */
 fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => {
-  const restaurantHours = document.getElementById('restaurant-hours');
+  const restaurantHours = document.querySelector('.restaurant-hours');
 
   const week = Object.entries(operatingHours);
 
@@ -160,7 +160,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
  * Create all reviews HTML and add them to the webpage.
  */
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  const container = document.getElementById('reviews-container');
+  const container = document.querySelector('.reviews-container');
   container.classList.add('col-12');
 
   const title = document.createElement('h2');
@@ -173,7 +173,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
     container.insertAdjacentElement('beforeend', noReviews);
     return;
   }
-  const ul = document.getElementById('reviews-list');
+  const ul = document.querySelector('.reviews-list');
   reviews.forEach(review => {
     ul.insertAdjacentHTML('beforeend', createReviewHTML(review));
   });
@@ -203,7 +203,7 @@ createReviewHTML = (review) => {
  * Add restaurant name to the breadcrumb navigation menu
  */
 fillBreadcrumb = (restaurant=self.restaurant) => {
-  const breadcrumb = document.getElementById('breadcrumb');
+  const breadcrumb = document.querySelector('.breadcrumb');
   const li = document.createElement('li');
   const anchor = document.createElement('a');
   li.append(anchor);
