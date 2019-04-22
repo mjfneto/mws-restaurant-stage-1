@@ -114,8 +114,8 @@ header {
 
 
 .footer {
-  background-color: #444;
-  color: #aaa;
+  background-color: #424242;
+  color: #dbdbdb;
   font-size: 0.96rem;
   letter-spacing: 0.09rem;
   padding: 2.25rem;
@@ -674,7 +674,7 @@ header {
 
 
 .reviews-container h2 {
-  color: #f58500;
+  color: #FFB666;
   font: 300 32px Arial, Helvetica, sans-serif;
   letter-spacing: -1px;
   margin-bottom: 30px;
@@ -743,8 +743,8 @@ header {
   border-radius: 5px;
   font-size: 20px;
   text-transform: uppercase;
-  background-color: #f58500;
-  color: #fff;
+  background-color: #ffc066;
+  color: #333;
 }
 
 
