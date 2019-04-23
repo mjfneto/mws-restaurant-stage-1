@@ -1,5 +1,9 @@
 const CACHE_NAME = 'rReviews-static-v1';
 
+/**
+   * On every serviceWoker install event resources are added
+   * to the static cache.
+   */
 self.addEventListener('install', event => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
@@ -28,6 +32,10 @@ self.addEventListener('install', event => {
     );
 });
 
+/**
+   * serviceWorker activation is listened to provide a basis for
+   * replacing older cache versions for newer ones.
+   */
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys().then(cacheNames => {
@@ -42,6 +50,12 @@ self.addEventListener('activate', event => {
     )
 });
 
+/**
+   * To every fetch done by a page
+   * caches are verified to get stored resources.
+   * In case a request is not contained in one of the caches,
+   * a fetch is done to get the resource.
+   */
 self.addEventListener('fetch', event => {
     const regex = new RegExp('\\?id=\\d*');
     if (regex.test(event.request.url)) {

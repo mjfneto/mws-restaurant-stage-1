@@ -4,6 +4,10 @@ let restaurants,
 var newMap
 var markers = []
 
+/**
+ * Checks if the browser has the serviceWorker, and if so gets it
+ * registered after the page is loaded to avoid new sw thread.
+ */
 if (navigator.serviceWorker) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js').then(registration => {
